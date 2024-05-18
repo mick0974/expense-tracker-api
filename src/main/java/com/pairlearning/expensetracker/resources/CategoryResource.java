@@ -21,7 +21,7 @@ public class CategoryResource {
 
     @GetMapping("")
     public ResponseEntity<List<Category>> getAllCategories(HttpServletRequest request) {
-        int userId = (Integer) request.getAttribute("userId");
+        int userId = 1;
         List<Category> categories = categoryService.fetchAllCategories(userId);
         return new ResponseEntity<>(categories, HttpStatus.OK);
     }
@@ -29,7 +29,7 @@ public class CategoryResource {
     @GetMapping("/{categoryId}")
     public ResponseEntity<Category> getCategoryById(HttpServletRequest request,
                                                     @PathVariable("categoryId") Integer categoryId) {
-        int userId = (Integer) request.getAttribute("userId");
+        int userId = 1;
         Category category = categoryService.fetchCategoryById(userId, categoryId);
         return new ResponseEntity<>(category, HttpStatus.OK);
     }
@@ -37,7 +37,7 @@ public class CategoryResource {
     @PostMapping("")
     public ResponseEntity<Category> addCategory(HttpServletRequest request,
                                                 @RequestBody Map<String, Object> categoryMap) {
-        int userId = (Integer) request.getAttribute("userId");
+        int userId = 1;
         String title = (String) categoryMap.get("title");
         String description = (String) categoryMap.get("description");
         Category category = categoryService.addCategory(userId, title, description);
@@ -48,7 +48,7 @@ public class CategoryResource {
     public ResponseEntity<Map<String, Boolean>> updateCategory(HttpServletRequest request,
                                                                @PathVariable("categoryId") Integer categoryId,
                                                                @RequestBody Category category) {
-        int userId = (Integer) request.getAttribute("userId");
+        int userId = 1;
         categoryService.updateCategory(userId, categoryId, category);
         Map<String, Boolean> map = new HashMap<>();
         map.put("success", true);
@@ -58,7 +58,7 @@ public class CategoryResource {
     @DeleteMapping("/{categoryId}")
     public ResponseEntity<Map<String, Boolean>> deleteCategory(HttpServletRequest request,
                                                                @PathVariable("categoryId") Integer categoryId) {
-        int userId = (Integer) request.getAttribute("userId");
+        int userId = 1;
         categoryService.removeCategoryWithAllTransactions(userId, categoryId);
         Map<String, Boolean> map = new HashMap<>();
         map.put("success", true);

@@ -24,7 +24,24 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "type": "object"
+                    "type": "object",
+                    "properties": {
+                      "categoryId": {
+                        "type": "integer"
+                      },
+                      "userId": {
+                        "type": "integer"
+                      },
+                      "title": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "string"
+                      },
+                      "totalExpense": {
+                        "type": "number"
+                      }
+                    }
                   }
                 }
               }
@@ -33,9 +50,6 @@
           "default": {
             "description": "others"
           }
-        },
-        "x-endpoint-constraints": {
-          "$ref": "#/components/x-endpoint-constraints/~1api~1categories/get"
         }
       },
       "post": {
@@ -75,8 +89,23 @@
             "description": "others"
           }
         },
-        "x-endpoint-constraints": {
-          "$ref": "#/components/x-endpoint-constraints/~1api~1categories/post"
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "required": true
+                  },
+                  "description": {
+                    "type": "string",
+                    "required": true
+                  }
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -109,9 +138,6 @@
           "default": {
             "description": "others"
           }
-        },
-        "x-endpoint-constraints": {
-          "$ref": "#/components/x-endpoint-constraints/~1api~1categories~1{categoryId}/delete"
         }
       },
       "get": {
@@ -160,9 +186,6 @@
           "default": {
             "description": "others"
           }
-        },
-        "x-endpoint-constraints": {
-          "$ref": "#/components/x-endpoint-constraints/~1api~1categories~1{categoryId}/get"
         }
       },
       "put": {
@@ -203,10 +226,12 @@
                     "type": "integer"
                   },
                   "description": {
-                    "type": "string"
+                    "type": "string",
+                    "required": true
                   },
                   "title": {
-                    "type": "string"
+                    "type": "string",
+                    "required": true
                   },
                   "totalExpense": {
                     "type": "number"
@@ -219,9 +244,6 @@
               }
             }
           }
-        },
-        "x-endpoint-constraints": {
-          "$ref": "#/components/x-endpoint-constraints/~1api~1categories~1{categoryId}/put"
         }
       }
     },
@@ -248,7 +270,27 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "type": "object"
+                    "type": "object",
+                    "properties": {
+                      "transactionId": {
+                        "type": "integer"
+                      },
+                      "categoryId": {
+                        "type": "integer"
+                      },
+                      "userId": {
+                        "type": "integer"
+                      },
+                      "amount": {
+                        "type": "number"
+                      },
+                      "note": {
+                        "type": "string"
+                      },
+                      "transactionDate": {
+                        "type": "integer"
+                      }
+                    }
                   }
                 }
               }
@@ -257,9 +299,6 @@
           "default": {
             "description": "others"
           }
-        },
-        "x-endpoint-constraints": {
-          "$ref": "#/components/x-endpoint-constraints/~1api~1categories~1{categoryId}~1transactions/get"
         }
       },
       "post": {
@@ -285,15 +324,6 @@
                   "type": "object",
                   "title": "com.pairlearning.expensetracker.domain.Transaction",
                   "properties": {
-                    "transactionId": {
-                      "type": "integer"
-                    },
-                    "categoryId": {
-                      "type": "integer"
-                    },
-                    "userId": {
-                      "type": "integer"
-                    },
                     "amount": {
                       "type": "number"
                     },
@@ -312,8 +342,28 @@
             "description": "others"
           }
         },
-        "x-endpoint-constraints": {
-          "$ref": "#/components/x-endpoint-constraints/~1api~1categories~1{categoryId}~1transactions/post"
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "amount": {
+                    "type": "number",
+                    "required": true
+                  },
+                  "note": {
+                    "type": "string",
+                    "required": true
+                  },
+                  "transactionDate": {
+                    "type": "integer",
+                    "format": "int64",
+                    "required": true
+                  }
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -358,9 +408,6 @@
           "default": {
             "description": "others"
           }
-        },
-        "x-endpoint-constraints": {
-          "$ref": "#/components/x-endpoint-constraints/~1api~1categories~1{categoryId}~1transactions~1{transactionId}/delete"
         }
       },
       "get": {
@@ -421,9 +468,6 @@
           "default": {
             "description": "others"
           }
-        },
-        "x-endpoint-constraints": {
-          "$ref": "#/components/x-endpoint-constraints/~1api~1categories~1{categoryId}~1transactions~1{transactionId}/get"
         }
       },
       "put": {
@@ -470,16 +514,20 @@
               "schema": {
                 "properties": {
                   "amount": {
-                    "type": "number"
+                    "type": "number",
+                    "required": true
                   },
                   "categoryId": {
                     "type": "integer"
                   },
                   "note": {
-                    "type": "string"
+                    "type": "string",
+                    "required": true
                   },
                   "transactionDate": {
-                    "type": "integer"
+                    "type": "integer",
+                    "format": "int64",
+                    "required": true
                   },
                   "transactionId": {
                     "type": "integer"
@@ -492,9 +540,6 @@
               }
             }
           }
-        },
-        "x-endpoint-constraints": {
-          "$ref": "#/components/x-endpoint-constraints/~1api~1categories~1{categoryId}~1transactions~1{transactionId}/put"
         }
       }
     },
@@ -520,9 +565,6 @@
           "default": {
             "description": "others"
           }
-        },
-        "x-endpoint-constraints": {
-          "$ref": "#/components/x-endpoint-constraints/~1api~1users~1login/post"
         }
       }
     },
@@ -548,163 +590,11 @@
           "default": {
             "description": "others"
           }
-        },
-        "x-endpoint-constraints": {
-          "$ref": "#/components/x-endpoint-constraints/~1api~1users~1register/post"
         }
       }
     }
   },
   "components": {
-    "x-endpoint-constraints": {
-      "/api/categories": {
-        "get": {
-          "global-reads": {
-            "g1": {
-              "name": "OK",
-              "location-details": {
-                "$ref": "#/components/x-global-variables-info/g1"
-              }
-            }
-          }
-        },
-        "post": {
-          "global-reads": {
-            "g2": {
-              "name": "CREATED",
-              "location-details": {
-                "$ref": "#/components/x-global-variables-info/g2"
-              }
-            }
-          }
-        }
-      },
-      "/api/categories/{categoryId}": {
-        "delete": {
-          "global-reads": {
-            "g1": {
-              "name": "OK",
-              "location-details": {
-                "$ref": "#/components/x-global-variables-info/g1"
-              }
-            }
-          }
-        },
-        "get": {
-          "global-reads": {
-            "g1": {
-              "name": "OK",
-              "location-details": {
-                "$ref": "#/components/x-global-variables-info/g1"
-              }
-            }
-          }
-        },
-        "put": {
-          "global-reads": {
-            "g1": {
-              "name": "OK",
-              "location-details": {
-                "$ref": "#/components/x-global-variables-info/g1"
-              }
-            }
-          }
-        }
-      },
-      "/api/categories/{categoryId}/transactions": {
-        "get": {
-          "global-reads": {
-            "g1": {
-              "name": "OK",
-              "location-details": {
-                "$ref": "#/components/x-global-variables-info/g1"
-              }
-            }
-          }
-        },
-        "post": {
-          "global-reads": {
-            "g2": {
-              "name": "CREATED",
-              "location-details": {
-                "$ref": "#/components/x-global-variables-info/g2"
-              }
-            }
-          }
-        }
-      },
-      "/api/categories/{categoryId}/transactions/{transactionId}": {
-        "delete": {
-          "global-reads": {
-            "g1": {
-              "name": "OK",
-              "location-details": {
-                "$ref": "#/components/x-global-variables-info/g1"
-              }
-            }
-          }
-        },
-        "get": {
-          "global-reads": {
-            "g1": {
-              "name": "OK",
-              "location-details": {
-                "$ref": "#/components/x-global-variables-info/g1"
-              }
-            }
-          }
-        },
-        "put": {
-          "global-reads": {
-            "g1": {
-              "name": "OK",
-              "location-details": {
-                "$ref": "#/components/x-global-variables-info/g1"
-              }
-            }
-          }
-        }
-      },
-      "/api/users/login": {
-        "post": {
-          "valid-path-conditions": [
-            "( staticinvoke <org.mindrot.jbcrypt.BCrypt: boolean checkpw(java.lang.String,java.lang.String)>((java.lang.String) {non_EPP#0}.<java.util.Map: java.lang.Object get(java.lang.Object)>(\"password\"), ((com.pairlearning.expensetracker.domain.User) this.<com.pairlearning.expensetracker.repositories.UserRepositoryImpl: org.springframework.jdbc.core.JdbcTemplate jdbcTemplate>.<org.springframework.jdbc.core.JdbcTemplate: java.lang.Object queryForObject(java.lang.String,java.lang.Object[],org.springframework.jdbc.core.RowMapper)>(\"SELECT USER_ID, FIRST_NAME, LAST_NAME, EMAIL, PASSWORD FROM ET_USERS WHERE EMAIL = ?\", newarray (java.lang.Object)[1], this.<com.pairlearning.expensetracker.repositories.UserRepositoryImpl: org.springframework.jdbc.core.RowMapper userRowMapper>)).<com.pairlearning.expensetracker.domain.User: java.lang.String getPassword()>()) != 0 )"
-          ],
-          "global-reads": {
-            "g0": {
-              "name": "HS256",
-              "location-details": {
-                "$ref": "#/components/x-global-variables-info/g0"
-              }
-            },
-            "g1": {
-              "name": "OK",
-              "location-details": {
-                "$ref": "#/components/x-global-variables-info/g1"
-              }
-            }
-          }
-        }
-      },
-      "/api/users/register": {
-        "post": {
-          "global-reads": {
-            "g0": {
-              "name": "HS256",
-              "location-details": {
-                "$ref": "#/components/x-global-variables-info/g0"
-              }
-            },
-            "g1": {
-              "name": "OK",
-              "location-details": {
-                "$ref": "#/components/x-global-variables-info/g1"
-              }
-            }
-          }
-        }
-      }
-    },
     "x-endpoint-interdependence": {},
     "x-global-variables-info": {
       "g0": {
